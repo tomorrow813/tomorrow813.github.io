@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深入Java集合---Vector源码笔记, java进阶之路">
+    <meta name="keywords" content="深入Java集合---LinkedList源码笔记, java进阶之路">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>深入Java集合---Vector源码笔记 | java进阶之路</title>
+    <title>深入Java集合---LinkedList源码笔记 | java进阶之路</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -395,12 +395,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">深入Java集合---Vector源码笔记</h1>
+                    <h1 class="description center-align post-title">深入Java集合---LinkedList源码笔记</h1>
                 </div>
             </div>
         </div>
@@ -547,7 +547,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    533
+                    949
                 </div>
                 
 
@@ -559,61 +559,102 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><code>VECTOR</code></p>
-<p><code>休息了一会会，接着再来看看Vector的源码吧，加油～～</code><br><img src='http://i1.fuimg.com/729820/166f5e5b5f18282c.png' width="25%" ><br><code>-----------------------------------------------------------------------------</code></p>
-<h2 id="1-1：vector数据结构"><a href="#1-1：vector数据结构" class="headerlink" title="1-1：vector数据结构"></a>1-1：vector数据结构</h2><p>底层数据结构为<code>数组</code>，支持快速随机访问</p>
-<h2 id="1-2：vector构造器"><a href="#1-2：vector构造器" class="headerlink" title="1-2：vector构造器"></a>1-2：vector构造器</h2><p><code>Vector</code>有四个不同的构造函数。 无参构造的容量默认值为10，容量增长系数<code>CapacityIncrement</code>为0</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">Vector</span><span class="token punctuation">(</span><span class="token keyword">int</span> initialCapacity<span class="token punctuation">,</span> <span class="token keyword">int</span> capacityIncrement<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>initialCapacity <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">"Illegal Capacity: "</span><span class="token operator">+</span>
-                                           initialCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>elementData <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span>initialCapacity<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>capacityIncrement <span class="token operator">=</span> capacityIncrement<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<h2 id="1-3：vector-indexOf-object-o"><a href="#1-3：vector-indexOf-object-o" class="headerlink" title="1-3：vector  indexOf(object o)"></a>1-3：vector  indexOf(object o)</h2><p>Vector在查找给定元素索引值方法中，<code>indexOf(object o )</code>–&gt;<br>Vector中允许元素为<code>null</code><br>源码都将该元素的值分为null和不为null两种情况处理，</p>
-<pre class=" language-java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>o<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h1 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a><font color=orange>LinkedList</font></h1><!-- ![avatar](http://i1.fuimg.com/729820/166f5e5b5f18282c.png)   -->
+
+<img src='http://i1.fuimg.com/729820/166f5e5b5f18282c.png' width="30%"  >
+<font color=orange>可爱的小姐姐头像镇楼～～～～～～
+继续总结。开始LinkedList咯～～～～
+还是来个可爱的分隔符～</font>
+
+<p><code>-------------------------------------------------------</code></p>
+<h2 id="3-1：linkedlist数据结构"><a href="#3-1：linkedlist数据结构" class="headerlink" title="3-1：linkedlist数据结构"></a>3-1：linkedlist数据结构</h2><p><code>LinkedList</code>是List接口的<strong>双向链表</strong>非同步实现，<br>并允许包括<code>null</code>在内的所有元素。<br>双向链表结构，链表中的每个节点都可以向前或者向后追溯，我们有几个概念如 下：</p>
+<p>双向链表节点对应的<code>类Node</code>的实例，<br>Node中包含成员变量：<code>prev，next，item。</code><br><code>prev</code>是该节点的上一个节点，<br><code>next</code>是该节点的下一个节点，<br><code>item</code>是该节点所包含的值。<br><code>first</code> 是双向链表的头节点，它的前一个节点是 null。<br><code>last</code> 是双向链表的尾节点，它的后一个节点是 null；<br>当链表中没有数据时，first 和 last 是同一个节点，前后指向都是 null；<br>因为是个<code>双向链表</code>，只要机器内存足够强大，是没有大小限制的。</p>
+<h2 id="3-2：linkedlist-根据索引返回对应的Node值"><a href="#3-2：linkedlist-根据索引返回对应的Node值" class="headerlink" title="3-2：linkedlist   根据索引返回对应的Node值"></a>3-2：linkedlist   根据索引返回对应的Node值</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * Returns the (non-null) Node at the specified element index.
+ */</span>
+Node<span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token function">node</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// assert isElementIndex(index);</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> <span class="token punctuation">(</span>size <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 如果 index 处于队列的前半部分，从头开始找，size >> 1 是 size 除以 2 的意思。</span>
+        Node<span class="token operator">&lt;</span>E<span class="token operator">></span> x <span class="token operator">=</span> first<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 直到 for 循环到 index 的前一个 node 停止</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> index<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            x <span class="token operator">=</span> x<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 如果 index 处于队列的后半部分，从尾开始找</span>
+        Node<span class="token operator">&lt;</span>E<span class="token operator">></span> x <span class="token operator">=</span> last<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 直到 for 循环到 index 的后一个 node 停止</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">></span> index<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>
+            x <span class="token operator">=</span> x<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">;</span>
     <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">int</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>Object o<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>o <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> index <span class="token punctuation">;</span> i <span class="token operator">&lt;</span> elementCount <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>elementData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>null<span class="token punctuation">)</span>
-                    <span class="token keyword">return</span> i<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> index <span class="token punctuation">;</span> i <span class="token operator">&lt;</span> elementCount <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>o<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>elementData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                    <span class="token keyword">return</span> i<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<h2 id="1-4：扩容机制"><a href="#1-4：扩容机制" class="headerlink" title="1-4：扩容机制"></a>1-4：扩容机制</h2><p>与<code>ArrayList</code>不同的是，<br><code>Vector</code>在每次<code>add</code>增加元素(可能是1个，也可能是一组)时，</p>
-<pre class=" language-java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token function">ensureCapacityHelper</span><span class="token punctuation">(</span>elementCount <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        elementData<span class="token punctuation">[</span>elementCount<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> e<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<p>都要调用<code>ensureCapacityHelper</code>方法来确保足够的容量。</p>
-<pre class=" language-java"><code class="language-java">    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">ensureCapacityHelper</span><span class="token punctuation">(</span><span class="token keyword">int</span> minCapacity<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// overflow-conscious code</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>minCapacity <span class="token operator">-</span> elementData<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
-            <span class="token function">grow</span><span class="token punctuation">(</span>minCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<p>当容量不足以容纳当前的元素个数时，即<code>minCapacity</code>（指的是当前元素数目<code>elementCount + 1） - elementData.length &gt; 0</code>，就会<code>grow(minCapacity)</code>扩容</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">grow</span><span class="token punctuation">(</span><span class="token keyword">int</span> minCapacity<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// overflow-conscious code</span>
-    <span class="token keyword">int</span> oldCapacity <span class="token operator">=</span> elementData<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> newCapacity <span class="token operator">=</span> oldCapacity <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>capacityIncrement <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span>
-                                     capacityIncrement <span class="token operator">:</span> oldCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>newCapacity <span class="token operator">-</span> minCapacity <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        newCapacity <span class="token operator">=</span> minCapacity<span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>newCapacity <span class="token operator">-</span> MAX_ARRAY_SIZE <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
-        newCapacity <span class="token operator">=</span> <span class="token function">hugeCapacity</span><span class="token punctuation">(</span>minCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    elementData <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> newCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<p>就看构造方法中传入的容量增长系数<code>CapacityIncrement</code>是否为0，<br>**如果不为0，就设置新的容量为 旧容量 + 容量增长量；<br>如果为0，设置新的容量为旧的容量的2倍，<br>如果设置后的容量还不够，则直接新的容量设置为传入参数所需要的容量 **<br>而后同样用<code>Arrays.copyof()</code>方法将元素拷贝到新的数组。</p>
-<h2 id="1-5：Vector是保证线程安全的"><a href="#1-5：Vector是保证线程安全的" class="headerlink" title="1-5：Vector是保证线程安全的"></a>1-5：Vector是保证线程安全的</h2><p>由于vector中Add方法加了<code>synchronized</code>，来保证add操作是线程安全的</p>
+<p>从源码中我们可以发现， LinkedList 并没有采用从头循环到尾的做法， 而是采取了<font color=orange>简单二分法</font>， 首先看看 index 是在链表的前半部分， 还是后半部分。 如果是前半部分， 就从头开始寻 找，反之亦然。通过这种方式，使循环的次数至少降低了一半，提高了查找的性能，<code>这种思想值 得我们借鉴。</code></p>
+<h2 id="3-3：linkedlist增加节点"><a href="#3-3：linkedlist增加节点" class="headerlink" title="3-3：linkedlist增加节点"></a>3-3：linkedlist增加节点</h2><p>节点删除的方式和追加类似，我们可以选择从头部删除，也可以选择从尾部删除，删除操作会把 节点的值，前后指向节点都置为 null，帮助 GC 进行回收。<br>追加节点时，我们可以选择追加到链表头部，还是追加到链表尾部，add 方法默认是从尾部开 始追加，addFirst 方法是从头部开始追加，我们分别来看下两种不同的追加方式：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">linkLast</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 把尾节点数据暂存</span>
+    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> l <span class="token operator">=</span> last<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 新建新的节点，初始化入参含义： </span>
+<span class="token comment" spellcheck="true">// l 是新节点的前一个节点，当前值是尾节点值</span>
+    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> e<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    last <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//如果链表为空（l 是尾节点，尾节点为空，链表即空），头部和尾部是同一个节点，都是新建的节</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>l <span class="token operator">==</span> null<span class="token punctuation">)</span>
+        first <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//否则把前尾节点的下一个节点，指向当前尾节点。</span>
+    <span class="token keyword">else</span>
+        l<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//大小和版本更改</span>
+    size<span class="token operator">++</span><span class="token punctuation">;</span>
+    modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<p>从头部追加（addFirst）</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * Links e as first element.
+ */</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">linkFirst</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> f <span class="token operator">=</span> first<span class="token punctuation">;</span>
+    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>null<span class="token punctuation">,</span> e<span class="token punctuation">,</span> f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    first <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>f <span class="token operator">==</span> null<span class="token punctuation">)</span>
+        last <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        f<span class="token punctuation">.</span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    size<span class="token operator">++</span><span class="token punctuation">;</span>
+    modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h2 id="3-4：linkedlist删除节点"><a href="#3-4：linkedlist删除节点" class="headerlink" title="3-4：linkedlist删除节点"></a>3-4：linkedlist删除节点</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> E <span class="token function">unlinkLast</span><span class="token punctuation">(</span>Node<span class="token operator">&lt;</span>E<span class="token operator">></span> l<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// assert l == last &amp;&amp; l != null;</span>
+    <span class="token keyword">final</span> E element <span class="token operator">=</span> l<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
+    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> prev <span class="token operator">=</span> l<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
+    l<span class="token punctuation">.</span>item <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    l<span class="token punctuation">.</span>prev <span class="token operator">=</span> null<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// help GC</span>
+    last <span class="token operator">=</span> prev<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>prev <span class="token operator">==</span> null<span class="token punctuation">)</span>
+        first <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        prev<span class="token punctuation">.</span>next <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    size<span class="token operator">--</span><span class="token punctuation">;</span>
+    modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> element<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> E <span class="token function">unlinkFirst</span><span class="token punctuation">(</span>Node<span class="token operator">&lt;</span>E<span class="token operator">></span> f<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// assert f == first &amp;&amp; f != null;</span>
+    <span class="token keyword">final</span> E element <span class="token operator">=</span> f<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
+    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> next <span class="token operator">=</span> f<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    f<span class="token punctuation">.</span>item <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    f<span class="token punctuation">.</span>next <span class="token operator">=</span> null<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// help GC</span>
+    first <span class="token operator">=</span> next<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">==</span> null<span class="token punctuation">)</span>
+        last <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        next<span class="token punctuation">.</span>prev <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    size<span class="token operator">--</span><span class="token punctuation">;</span>
+    modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> element<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 
             </div>
             <hr/>
@@ -639,7 +680,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/tomorrow813/2020/11/17/Vector/">https://github.com/tomorrow813/2020/11/17/Vector/</a>
+                    <a href="https://github.com/tomorrow813/2020/11/17/LinkedList/">https://github.com/tomorrow813/2020/11/17/LinkedList/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -852,13 +893,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/11/17/LinkedList/">
+                <a href="/2020/11/17/List%E9%9B%86%E5%90%88%E6%AF%94%E8%BE%83/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="深入Java集合---LinkedList源码笔记">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="深入Java集合---List集合比较">
                         
-                        <span class="card-title">深入Java集合---LinkedList源码笔记</span>
+                        <span class="card-title">深入Java集合---List集合比较</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -897,13 +938,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/17/ArrayList/">
+                <a href="/2020/11/17/Vector/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="深入学习-----ArrayList">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="深入Java集合---Vector源码笔记">
                         
-                        <span class="card-title">深入学习-----ArrayList</span>
+                        <span class="card-title">深入Java集合---Vector源码笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -927,8 +968,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java%E5%9F%BA%E7%A1%80%EF%BC%8C%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">java基础，源码</span>
+                    <a href="/tags/java%EF%BC%8C%E9%9B%86%E5%90%88%EF%BC%8C%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">java，集合，源码</span>
                     </a>
                     
                 </div>
