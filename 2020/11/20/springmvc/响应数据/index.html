@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="java进阶之路">
+    <meta name="keywords" content="SpringMVC响应数据, java进阶之路">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>java进阶之路</title>
+    <title>SpringMVC响应数据 | java进阶之路</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -396,12 +396,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://edu-20201203.oss-cn-beijing.aliyuncs.com/2020-10-12-23-12-06.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">SpringMVC响应数据</h1>
                 </div>
             </div>
         </div>
@@ -516,9 +516,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/SpringMVC/">
+                                <span class="chip bg-color">SpringMVC</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -530,21 +534,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-01
+                    2020-11-20
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-01
+                    2020-12-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    424
+                    773
                 </div>
                 
 
@@ -556,67 +560,86 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>title: CountDownLatch<br>date: 2020-11-20 15:12:14<br>tags: 多线程</p>
-<hr>
-<h2 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h2><p>主要有俩个方法</p>
-<p>昂一个线程或者多个线程调用<code>await</code>方法的时候，这些线程会被阻塞，</p>
-<p>调用<code>countDown</code>方法会将计数器减1，调用countDown方法的线程不会被阻塞</p>
-<p>当计数器的值变为0的时候，因为<code>await</code>阻塞的线程就会被唤醒，继续执行</p>
+                <h2 id="几种途径输出模型数据"><a href="#几种途径输出模型数据" class="headerlink" title="几种途径输出模型数据"></a>几种途径输出模型数据</h2><p>1）    <strong>ModelAndView</strong>: 处理方法返回值类型为 ModelAndView 时, 方法体即可通过该对象添加模型数据<br>2）    <strong>Map 或 Model</strong>: 入参为 org.springframework.ui.Model、<br>org.springframework.ui.ModelMap 或 java.uti.Map 时，处理方法返回时，Map 中的数据会自动添加到模型中。</p>
+<h3 id="ModelAndView"><a href="#ModelAndView" class="headerlink" title="ModelAndView"></a>ModelAndView</h3><pre><code>控制器处理方法的返回值如果为 ModelAndView, 则其既包含视图信息，也包含模型数据信息</code></pre>
+<p>1）    两个重要的成员变量:</p>
+<pre><code><pre class="line-numbers language-java" data-language="java"><code class="language-java">private Object view;视图信息
+private ModelMap model; 模型数据<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></code></pre>
+<p>2）添加模型数据:<br>MoelAndView addObject(String attributeName, Object attributeValue)   设置模型数据<br>ModelAndView addAllObject(Map&lt;String, ?&gt; modelMap)<br>3）设置视图:<br>void setView(View view)                设置视图对象<br>void setViewName(String viewName)     设置视图名字<br>4）获取模型数据<br>      protected Map&lt;String, Object&gt; getModelInternal()   获取模型数据<br>      public ModelMap getModelMap()<br>      public Map&lt;String, Object&gt; getModel()<br>5.3.1    Map介绍</p>
+<p><strong>SpringMVC在handler方法上传入Map、Model和ModelMap参数，并向这些参数中保存数据（放入到<code>请求域</code>），都可以在<code>页面获取到</code></strong></p>
+<ul>
+<li>它们之间是什么关系？</li>
+<li>运行时的具体类型都是 <code>BindingAwareModelMap</code>，相当于给BindingAwareModelMap中<strong>保存的数据都会放在请求域中</strong></li>
+<li></li>
+<li> Map(jdk中的接口)        Model（spring的接口）</li>
+<li></li>
+<li> ModelMap(class,实现Map接口)</li>
+<li>BindingAwareModelMap继承了ExtendedModelMap，ExtendedModelMap继承了ModelMap,实现了Model接口</li>
+</ul>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">
-public static void main(String[] args) throws InterruptedException &#123;
-        CountDownLatch countDownLatch &#x3D; new CountDownLatch(3);
-        for (int i &#x3D; 0 ; i &lt; 3;i++)&#123;
-            new Thread(()-&gt;&#123;
-                System.out.println(Thread.currentThread().getName()+&quot;:&quot;);
-                countDownLatch.countDown();
-            &#125;,String.valueOf(i)).start();
-        &#125;
 
-    countDownLatch.await();
-        System.out.println(&quot;main完成&quot;);
-    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#x2F;**
+     * url: http:&#x2F;&#x2F;localhost:8080&#x2F;demo&#x2F;handle01
+     *&#x2F;
+    @RequestMapping(&quot;&#x2F;handle01&quot;)
+    public ModelAndView handle01(@ModelAttribute(&quot;name&quot;) String name) &#123;
 
-<h2 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java">
+        int c &#x3D; 1&#x2F;0;
 
-CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
-            System.out.println(&quot;等到3个线程完成之后才会打印&quot;);
-        &#125;);
-        for (int i &#x3D; 0 ; i &lt; 3;i++)&#123;
-            final int tmp &#x3D; i ;
-            new Thread(()-&gt;&#123;
-                System.out.println(Thread.currentThread().getName()+&quot;:&quot;+tmp);
-                try &#123;
-                    cyclicBarrier.await();
-                &#125; catch (InterruptedException e) &#123;
-                    e.printStackTrace();
-                &#125; catch (BrokenBarrierException e) &#123;
-                    e.printStackTrace();
-                &#125;
-            &#125;,String.valueOf(i)).start();
-        &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h2><p><code>acquire</code>:当一个线程调用acquire操作的时候，要么通过成功获取信号量（<code>信号量减1</code>），<strong>要么一直等待下去，知道有线程释放信号量或者超时</strong><br><code>release</code>：实际上会将<code>信号量加1</code>，然后等待<code>唤醒等待的线程</code></p>
-<p><code>信号量主要目的</code><br>一个是用于<code>共享资源的互斥使用</code>，<br>一个是用于<code>并发线程数的控制</code></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">Semaphore semaphore &#x3D; new Semaphore(3);
-        for(int i &#x3D; 0;i&lt;6;i++)&#123;
-            new Thread(()-&gt;&#123;
+        Date date &#x3D; new Date();&#x2F;&#x2F; 服务器时间
+        &#x2F;&#x2F; 返回服务器时间到前端页面
+        &#x2F;&#x2F; 封装了数据和页面信息的 ModelAndView
+        ModelAndView modelAndView &#x3D; new ModelAndView();
+        &#x2F;&#x2F; addObject 其实是向请求域中request.setAttribute(&quot;date&quot;,date);
+        modelAndView.addObject(&quot;date&quot;,date);
+        &#x2F;&#x2F; 视图信息(封装跳转的页面信息) 逻辑视图名
+        modelAndView.setViewName(&quot;success&quot;);
+        return modelAndView;
+    &#125;
 
-                try &#123;
-                    semaphore.acquire();
-                    System.out.println(Thread.currentThread().getName()+&quot;抢到了&quot;);
-                    try &#123;TimeUnit.SECONDS.sleep(1);&#125; catch (InterruptedException e) &#123; e.printStackTrace();&#125;
-                    System.out.println(Thread.currentThread().getName()+&quot;离开了&quot;);
-                &#125; catch (InterruptedException e) &#123;
-                    e.printStackTrace();
-                &#125;finally &#123;
-                    semaphore.release();
-                &#125;
-            &#125;,String.valueOf(i)).start();
-        &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+   
+    &#x2F;**
+     * 直接声明形参ModelMap，封装数据
+     * url: http:&#x2F;&#x2F;localhost:8080&#x2F;demo&#x2F;handle11
+     *
+     * &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;modelmap:class org.springframework.validation.support.BindingAwareModelMap
+     *&#x2F;
+    @RequestMapping(&quot;&#x2F;handle11&quot;)
+    public String handle11(ModelMap modelMap) &#123;
+        Date date &#x3D; new Date();&#x2F;&#x2F; 服务器时间
+        modelMap.addAttribute(&quot;date&quot;,date);
+        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;modelmap:&quot; + modelMap.getClass());
+        return &quot;success&quot;;
+    &#125;
 
-<hr>
 
+    &#x2F;**
+     * 直接声明形参Model，封装数据
+     * url: http:&#x2F;&#x2F;localhost:8080&#x2F;demo&#x2F;handle12
+     * &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;model:class org.springframework.validation.support.BindingAwareModelMap
+     *&#x2F;
+    @RequestMapping(&quot;&#x2F;handle12&quot;)
+    public String handle12(Model model) &#123;
+        Date date &#x3D; new Date();
+        model.addAttribute(&quot;date&quot;,date);
+        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;model:&quot; + model.getClass());
+        return &quot;success&quot;;
+    &#125;
+
+
+    &#x2F;**
+     * 直接声明形参Map集合，封装数据
+     * url: http:&#x2F;&#x2F;localhost:8080&#x2F;demo&#x2F;handle13
+     * &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;map:class org.springframework.validation.support.BindingAwareModelMap
+     *&#x2F;
+    @RequestMapping(&quot;&#x2F;handle13&quot;)
+    public String handle13(Map&lt;String,Object&gt; map) &#123;
+        Date date &#x3D; new Date();
+        map.put(&quot;date&quot;,date);
+        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;map:&quot; + map.getClass());
+        return &quot;success&quot;;
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
             </div>
             <hr/>
 
@@ -641,7 +664,7 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/tomorrow813/2020/12/01/%E5%A4%9A%E7%BA%BF%E7%A8%8B/CountDownLatch%E7%9A%84%E5%AD%A6%E4%B9%A0/">https://github.com/tomorrow813/2020/12/01/%E5%A4%9A%E7%BA%BF%E7%A8%8B/CountDownLatch%E7%9A%84%E5%AD%A6%E4%B9%A0/</a>
+                    <a href="https://github.com/tomorrow813/2020/11/20/springmvc/%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE/">https://github.com/tomorrow813/2020/11/20/springmvc/%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -678,7 +701,11 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/SpringMVC/">
+                                    <span class="chip bg-color">SpringMVC</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -846,18 +873,16 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/12/01/%E5%A4%9A%E7%BA%BF%E7%A8%8B/CountDownLatch%E7%9A%84%E5%AD%A6%E4%B9%A0/">
+                <a href="/2020/11/20/springmvc/Restful/">
                     <div class="card-image">
                         
+                        <img src="https://edu-20201203.oss-cn-beijing.aliyuncs.com/2020-10-12-23-12-06.png" class="responsive-img" alt="SpringMVC对Restful风格的支持">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
+                        <span class="card-title">SpringMVC对Restful风格的支持</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -867,9 +892,9 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -878,7 +903,14 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SpringMVC/">
+                        <span class="chip bg-color">SpringMVC</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -889,13 +921,12 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/01/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%AD%BB%E9%94%81/">
+                <a href="/2020/11/20/springmvc/json%E4%BA%A4%E4%BA%92/">
                     <div class="card-image">
                         
+                        <img src="https://edu-20201203.oss-cn-beijing.aliyuncs.com/2020-10-12-23-12-06.png" class="responsive-img" alt="json交互">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
+                        <span class="card-title">json交互</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -906,7 +937,7 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
                             </span>
                         <span class="publish-author">
                             
@@ -915,6 +946,14 @@ CyclicBarrier cyclicBarrier &#x3D; new CyclicBarrier(3,()-&gt;&#123;
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SpringMVC/">
+                        <span class="chip bg-color">SpringMVC</span>
+                    </a>
+                    
                 </div>
                 
             </div>
