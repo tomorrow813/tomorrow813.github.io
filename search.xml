@@ -691,12 +691,18 @@
     
     
     <entry>
-      <title>移动零</title>
+      <title>爬楼梯</title>
       <link href="2020/11/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/%E7%88%AC%E6%A5%BC%E6%A2%AF/"/>
       <url>2020/11/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/%E7%88%AC%E6%A5%BC%E6%A2%AF/</url>
       
-        <content type="html"><![CDATA[<ol start="70"><li>爬楼梯<br>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</li></ol><p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p><p>注意：给定 n 是一个正整数。</p><p>示例 1：</p><p>输入： 2<br>输出： 2<br>解释： 有两种方法可以爬到楼顶。</p><ol><li> 1 阶 + 1 阶</li><li> 2 阶<br>示例 2：</li></ol><p>输入： 3<br>输出： 3<br>解释： 有三种方法可以爬到楼顶。</p><ol><li> 1 阶 + 1 阶 + 1 阶</li><li> 1 阶 + 2 阶</li><li> 2 阶 + 1 阶</li></ol>]]></content>
+        <content type="html"><![CDATA[<ol><li> 爬楼梯<br>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</li></ol><p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p><p>注意：给定 n 是一个正整数。</p><p>示例 1：</p><p>输入： 2<br>输出： 2<br>解释： 有两种方法可以爬到楼顶。</p><ol><li> 1 阶 + 1 阶</li><li> 2 阶<br>示例 2：</li></ol><p>输入： 3<br>输出： 3<br>解释： 有三种方法可以爬到楼顶。</p><ol><li> 1 阶 + 1 阶 + 1 阶</li><li> 1 阶 + 2 阶</li><li> 2 阶 + 1 阶</li></ol>]]></content>
       
+      
+      <categories>
+          
+          <category> 动态规划 </category>
+          
+      </categories>
       
       
         <tags>
