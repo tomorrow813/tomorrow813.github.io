@@ -541,14 +541,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-01
+                    2020-12-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    895
+                    1.1k
                 </div>
                 
 
@@ -576,6 +576,18 @@
 <p>死亡：线程完成了它的全部工作或线程被提前强制性地中止或出现异常导致结束</p>
 <p> -&gt; 创建状态：一个新进程被创建时的第一个状态；<br>创建状态 -&gt; 就绪状态：当进程被创建完成并初始化后，<br>                     一切就绪准备运行时，<br>                     变为就绪状态，这个过程是很快的；<br>就绪态 -&gt; 运行状态：处于就绪状态的进程被操作系统的进程调度器选中后，<br>                    就分配给 CPU 正式运行该进程；<br>运行状态 -&gt; 结束状态：当进程已经运行完成或出错时，<br>                      会被操作系统作结束状态处理；<br>运行状态 -&gt; 就绪状态：处于运行状态的进程在运行过程中，<br>                      由于分配给它的运行时间片用完，<br>                      <strong>yield( )或失去cpu资源</strong><br>                      操作系统会把该进程变为就绪态，<br>                      接着从就绪态选中另外一个进程运行；<br>运行状态 -&gt; 阻塞状态：当进程请求某个事件且必须等待时，例如请求 I/O 事件；<br>                    sleep(long time) join  wait 等待同步锁</p>
 <p>阻塞状态 -&gt; 就绪状态：当进程要等待的事件完成时，它从阻塞状态变到就绪状态；<br>                    sleep时间到  join结束  notify/notifyAll 获取到了同步锁</p>
+<h2 id="wait和sleep的异同"><a href="#wait和sleep的异同" class="headerlink" title="wait和sleep的异同"></a>wait和sleep的异同</h2><p>相同点：<br>一旦执行方法都可以使当前线程进入阻塞状态</p>
+<p>不同点：</p>
+<ol>
+<li><p><code>来自不同的类</code>，Thread类中声明了sleep,object类中声明wait</p>
+</li>
+<li><p><code>调用的要求不同</code>：sleep可以在任意需要的场景下调用，wait必须在同步代码块或者同步方法中调用</p>
+</li>
+<li><p><code>关于是否释放同步监视器的问题</code>：如果两个方法都在同步代码块当中，sleep不会释放锁，wait会释放锁</p>
+</li>
+<li><p>Wait 通常被用于线程间交互/通信，sleep 通常被用于暂停执行。<br>wait() 方法被调用后，线程不会自动苏醒，需要别的线程调用同一个对象上的 notify() 或者 notifyAll() 方法。sleep() 方法执行完成后，线程会自动苏醒。或者可以使用 wait(long timeout)超时后线程会自动苏醒。</p>
+</li>
+</ol>
 
             </div>
             <hr/>
@@ -880,8 +892,12 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            小丸子
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-category">
+                                    动态规划
+                                </a>
+                            
                             
                         </span>
                     </div>

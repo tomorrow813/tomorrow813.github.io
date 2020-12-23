@@ -527,6 +527,15 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%B9%B6%E5%8F%91/" class="post-category">
+                                并发
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -541,14 +550,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-01
+                    2020-12-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.1k
                 </div>
                 
 
@@ -569,20 +578,10 @@
 </li>
 <li><p>创建Thread子类对象，即创建了线程对象。</p>
 </li>
-<li><p>调用线程对象start方法：<strong>启动线程</strong>，<strong>调用run方法。</strong></p>
+<li><p>调用线程对象start方法</p>
 </li>
 </ol>
-<ol>
-<li><p>如果自己手动调用run()方法，那么就只是普通方法，没有启动多线程模式。</p>
-</li>
-<li><p>run()方法由JVM调用，<strong>什么时候调用，执行的过程控制都有操作系统的CPU 调度决定。</strong></p>
-</li>
-<li><p>想要启动多线程，必须调用start方法。</p>
-</li>
-<li><p><strong>一个线程对象只能调用一次start()方法</strong>启动，如果重复调用了，则将抛出以上 的异常“<code>IllegalThreadStateException</code>”。<br>常用方法：<br><code>static Thread yield()</code>:释放当前线程cpu的执行权 ，下一时刻还可以再获取到<br><code>join()</code>:当a线程调用b线程的 join() 方法时，<code>a线程将被阻塞</code>，直到b线程执行完为止,a线程才结束阻塞<br><code>static void sleep(long millis)</code>：(指定时间:毫秒)<br>令当前活动线程在<strong>指定时间段内放弃对CPU控制</strong>,使其他线程有机会被执行,<strong>时间到后重排队</strong>。 抛出InterruptedException异常<br>stop(): 强制线程生命期结束，不推荐使用<br>boolean isAlive()：返回boolean，判断线程是否还活着</p>
 <h3 id="实现Runnable接口的方式"><a href="#实现Runnable接口的方式" class="headerlink" title="实现Runnable接口的方式"></a>实现Runnable接口的方式</h3><p>方式二：实现Runnable接口</p>
-</li>
-</ol>
 <ol>
 <li><p>定义子类，实现Runnable接口。</p>
 </li>
@@ -596,17 +595,13 @@
 </li>
 </ol>
 <p>public class Thread extends Object implements Runnable<br>都需要重写run方法，</p>
-<p><code>实现方式的好处</code></p>
-<ol>
-<li><p>避免了单继承的局限性s extends Thread就不能继承其他的父类了</p>
-</li>
-<li><p><code>多个线程可以共享同一个接口实现类的对象</code>，非常适合多个相同线程来处理同一份资源。 </p>
-</li>
-<li><p><code>以继承的方式的共享数据的话就需要写static</code></p>
-</li>
+<h2 id="实现方式的好处"><a href="#实现方式的好处" class="headerlink" title="实现方式的好处"></a><code>实现方式的好处</code></h2><ol>
+<li>避免了单继承的局限性s extends Thread就不能继承其他的父类了</li>
+<li><code>多个线程可以共享同一个接口实现类的对象</code>，非常适合多个相同线程来处理同一份资源。 </li>
+<li><code>以继承的方式的共享数据的话就需要写static</code></li>
 </ol>
 <h3 id="实现Callable接口"><a href="#实现Callable接口" class="headerlink" title="实现Callable接口"></a>实现Callable接口</h3><p>与使用Runnable相比， Callable功能更强大些</p>
-<p>相比run()方法，可以有返回值<br>方法可以抛出异常<br>支持泛型的返回值<br>需要借助FutureTask类，比如获取返回结果<br>FutureTask 同时实现了Runnable, Future接口。它既可以作为 Runnable被线程执行，又可以作为Future得到Callable的返回值</p>
+<p><strong>run()方法，<br>可以有返回值<br>方法可以抛出异常<br>支持泛型的返回值</strong><br>需要借助FutureTask类，比如获取返回结果<br>FutureTask 同时实现了Runnable, Future接口。它既可以作为 Runnable被线程执行，又可以作为Future得到Callable的返回值</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">FutureTask&lt;Integer&gt; futureTask &#x3D; new FutureTask&lt;Integer&gt;(new MyThread03());
         new Thread(futureTask).start();
         try &#123;
@@ -617,7 +612,8 @@
         &#125; catch (ExecutionException e) &#123;
             e.printStackTrace();
         &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="使用线程池"><a href="#使用线程池" class="headerlink" title="使用线程池"></a>使用线程池</h3><p>背景：经常创建和销毁、使用量特别大的资源，比如并发情况下的线程， 对性能影响很大。 思路：提前创建好多个线程，放入线程池中，使用时直接获取，使用完 放回池中。可以避免频繁创建销毁、实现重复利用。类似生活中的公共交 通工具。<br>好处：</p>
+
+<h3 id="使用线程池"><a href="#使用线程池" class="headerlink" title="使用线程池"></a>使用线程池</h3><p>比如并发情况下请求树多，且每个线程的执行时间端的情况下，经常创建和销毁线程 对性能影响很大。<br>思路：提前创建好多个线程，放入线程池中，使用时直接获取，使用完 放回池中。可以避免频繁创建销毁、实现重复利用。<br>好处：</p>
 <p>提高响应速度（减少了创建新线程的时间）<br>降低资源消耗（重复利用线程池中线程，不需要每次都创建）<br>便于线程管理<br> corePoolSize：核心池的大小<br> maximumPoolSize：最大线程数<br> keepAliveTime：线程没有任务时最多保持多长时间后会终止</p>
 <p>JDK 5.0起提供了线程池相关API：<br>ExecutorService 和 Executors<br>ExecutorService：真正的线程池接口。常见子类ThreadPoolExecutor</p>
 <p><code>void execute(Runnable command)</code> ：执行任务/命令，没有返回值，一般用来执行 Runnable<br><code>&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task)</code>：执行任务，有返回值，一般又来执行 Callable<br><code>void shutdown() ：关闭连接池</code></p>
@@ -765,20 +761,20 @@ class Consumer implements Runnable &#123; &#x2F;&#x2F; 消费者
 
 
 
-<h2 id="线程的调度"><a href="#线程的调度" class="headerlink" title="线程的调度"></a>线程的调度</h2><h2 id="wait和sleep的异同"><a href="#wait和sleep的异同" class="headerlink" title="wait和sleep的异同"></a>wait和sleep的异同</h2><p>相同点：<br>一旦执行方法都可以使当前线程进入阻塞状态</p>
-<p>不同点：</p>
-<ol>
-<li><code>来自不同的类</code>，Thread类中声明了sleep,object类中声明wait</li>
-<li><code>调用的要求不同</code>：sleep可以在任意需要的场景下调用，wait必须在同步代码块或者同步方法中调用</li>
-<li><code>关于是否释放同步监视器的问题</code>：如果两个方法都在同步代码块当中，sleep不会释放锁，wait会释放锁</li>
-</ol>
-<h2 id="synchronized-与-Lock-的对比"><a href="#synchronized-与-Lock-的对比" class="headerlink" title="synchronized 与 Lock 的对比"></a><code>synchronized 与 Lock 的对比</code></h2><ol>
+<h2 id="线程的调度"><a href="#线程的调度" class="headerlink" title="线程的调度"></a>线程的调度</h2><h2 id="synchronized-与-Lock-的对比"><a href="#synchronized-与-Lock-的对比" class="headerlink" title="synchronized 与 Lock 的对比"></a><code>synchronized 与 Lock 的对比</code></h2><ol>
 <li><p>Lock是显式锁（手动开启和关闭锁，别忘记关闭锁），<br>synchronized是 隐式锁，出了作用域自动释放<br>当前线程的同步方法、同步代码块执行结束。<br>当前线程在同步代码块、同步方法中遇到break、return终止了该代码块、 该方法的继续执行。<br>当前线程在同步代码块、同步方法中出现了未处理的Error或Exception，导致异常结束。<br>当前线程在同步代码块、同步方法中执行了线程对象的<code>wait()</code>方法，<code>当前线程暂停，并释放锁。</code></p>
 </li>
 <li><p>Lock只有代码块锁，<br>synchronized有代码块锁和方法锁</p>
 </li>
 <li><p>使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。并且具有 更好的扩展性（提供更多的子类）</p>
 </li>
+</ol>
+<h2 id="为什么我们调用-start-方法时会执行-run-方法，为什么我们不能直接调用-run-方法？"><a href="#为什么我们调用-start-方法时会执行-run-方法，为什么我们不能直接调用-run-方法？" class="headerlink" title="为什么我们调用 start() 方法时会执行 run() 方法，为什么我们不能直接调用 run() 方法？"></a>为什么我们调用 start() 方法时会执行 run() 方法，为什么我们不能直接调用 run() 方法？</h2><p>总结： 调用 start 方法方可启动线程并使线程进入就绪状态，而 run 方法只是 thread 的一个普通方法调用，还是在主线程里执行。</p>
+<ol start="5">
+<li>run()方法由JVM调用，<strong>什么时候调用，执行的过程控制都有操作系统的CPU 调度决定。</strong></li>
+</ol>
+<ol start="6">
+<li><strong>一个线程对象只能调用一次start()方法</strong>启动，如果重复调用了，则将抛出以上 的异常“<code>IllegalThreadStateException</code>”。<br>常用方法：<br><code>static Thread yield()</code>:释放当前线程cpu的执行权 ，下一时刻还可以再获取到<br><code>join()</code>:当a线程调用b线程的 join() 方法时，<code>a线程将被阻塞</code>，直到b线程执行完为止,a线程才结束阻塞<br><code>static void sleep(long millis)</code>：(指定时间:毫秒)<br>令当前活动线程在<strong>指定时间段内放弃对CPU控制</strong>,使其他线程有机会被执行,<strong>时间到后重排队</strong>。 抛出InterruptedException异常<br>stop(): 强制线程生命期结束，不推荐使用<br>boolean isAlive()：返回boolean，判断线程是否还活着</li>
 </ol>
 
             </div>
