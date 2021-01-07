@@ -550,14 +550,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-01-06
+                    2021-01-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    283
+                    2.3k
                 </div>
                 
 
@@ -569,16 +569,27 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <font color = 'gold' size = 4>
-啦啦啦啦啦啦啦啦啦   
+                <font color = 'gold' size = 5 align = 'center'>
 
-<p>实验室的小伙伴一直在实验室打电话<br>哎 生活不易 猪猪叹气</p>
-<p>既然不能专心刷题，<br>那就来和链表玩一会把<br>～～～<br></font >  </p>
+<p>  啦啦啦啦啦啦啦啦啦   </p>
+<p>实验室的小伙伴一直在实验室打电话<br>哎 生活不易 猪猪叹气  </p>
+<p>既然不能专心刷题，  </p>
+<p>那就来和链表玩一会把  </p>
+<p>～～～<br></font >  </p>
 <hr>
 <font color = 'pink' size = 3> 
 
-<p>👇 先来一道简单的<br>调整调整心态<br></font></p>
-<h2 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203. 移除链表元素"></a>203. 移除链表元素</h2><p>删除链表中等于给定值 val 的<strong>所有节点</strong>。<br>示例:<br>输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6<br>输出: 1-&gt;2-&gt;3-&gt;4-&gt;5<br><code>这道题太简单了就弄个哑节点  然后遍历链表  只要遇到相同的就把当前元素的pre指向cur的next即可.哨兵节点广泛应用于树和链表中，如伪头、伪尾、标记等，它们是纯功能的，通常不保存任何数据，其主要目的是使链表标准化，如使链表永不为空、永不无头、简化插入和删除。</code></p>
+
+<p>👇 先来一道简单的   </p>
+<p>调整调整心态  </p>
+</font>
+🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️
+## 203. 移除链表元素
+删除链表中等于给定值 val 的**所有节点**。
+示例:
+输入: 1->2->6->3->4->5->6, val = 6
+输出: 1->2->3->4->5
+`这道题太简单了就弄个哑节点  然后遍历链表  只要遇到相同的就把当前元素的pre指向cur的next即可.哨兵节点广泛应用于树和链表中，如伪头、伪尾、标记等，它们是纯功能的，通常不保存任何数据，其主要目的是使链表标准化，如使链表永不为空、永不无头、简化插入和删除。`
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">public ListNode removeElements(ListNode head, int val) &#123;
         ListNode dummy &#x3D; new ListNode(-1);
         dummy.next &#x3D; head;
@@ -593,6 +604,183 @@
         &#125;
         return dummy.next;
     &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<hr>
+<p>🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️</p>
+<h2 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a>2. 两数相加</h2><p>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。<br>请你将两个数相加，并以相同形式返回一个表示和的链表。<br>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。<br>输入：l1 = [2,4,3], l2 = [5,6,4]<br>输出：[7,0,8]<br>解释：342 + 465 = 807.</p>
+<p><code>将两个链表看成是相同长度的进行遍历，如果一个链表较短则在前面补 00，比如 987 + 23 = 987 + 023 = 1010 每一位计算的同时需要考虑上一位的进位问题，而当前位计算结束后同样需要更新进位值</code><br><code>如果两个链表全部遍历完毕后，进位值为 1，则在新链表最前方添加节点 1</code><br><code>**小技巧**：对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果</code></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Solution &#123;
+    public ListNode addTwoNumbers(ListNode head1, ListNode head2) &#123;
+        ListNode nummy &#x3D; new ListNode(0);
+        ListNode cur &#x3D; nummy,l1&#x3D;head1,l2&#x3D;head2;
+        int carry &#x3D; 0 ;
+        while(l1!&#x3D;null||l2!&#x3D;null)&#123;
+            int num1 &#x3D; l1!&#x3D;null?l1.val:0;
+            int num2 &#x3D; l2!&#x3D;null?l2.val:0;
+            int sum &#x3D; num1+num2+carry;
+            carry&#x3D;sum&#x2F;10;
+            cur.next&#x3D;new ListNode(sum%10);
+            cur&#x3D;cur.next;
+            if(l1!&#x3D;null) l1&#x3D;l1.next;
+            if(l2!&#x3D;null) l2&#x3D;l2.next;
+        &#125;
+        if(carry&gt;0)  cur.next &#x3D; new ListNode(carry);
+        return nummy.next;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<hr>
+<p>🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️</p>
+<h2 id="160-相交链表-面试题-02-07-链表相交-剑指-Offer-52-两个链表的第一个公共节点"><a href="#160-相交链表-面试题-02-07-链表相交-剑指-Offer-52-两个链表的第一个公共节点" class="headerlink" title="160. 相交链表 面试题 02.07. 链表相交 剑指 Offer 52. 两个链表的第一个公共节点"></a>160. 相交链表 面试题 02.07. 链表相交 剑指 Offer 52. 两个链表的第一个公共节点</h2><p>编写一个程序，找到两个单链表相交的起始节点。<br><code>pA走过的路径为A链+B链,pB走过的路径为B链+A链</code><br><code>pA和pB走过的长度都相同，都是A链和B链的长度之和，</code><br><code>相当于将两条链从尾端对齐，</code><br><code>如果相交，则会提前在相交点相遇，如果没有相交点，</code><br><code>则会在最后相遇</code></p>
+<p><img src="1.png"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Solution &#123;
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) &#123;
+        &#x2F;&#x2F;两个链表相交，相交后的长度是相同的。此时需要消除链表的长度差
+        if(headA&#x3D;&#x3D;null||headB&#x3D;&#x3D;null) return null;
+        ListNode ha&#x3D;headA,hb&#x3D;headB;
+        while(ha!&#x3D;hb)&#123;
+            ha&#x3D;(ha&#x3D;&#x3D;null)?headB:ha.next;
+            hb&#x3D;(hb&#x3D;&#x3D;null)?headA:hb.next;
+        &#125;
+        return ha;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<hr>
+<font color = 'pink' size = 3> 
+
+<p>👇 小的串一串，大的串一串，最后两串连一串……</p>
+</font>
+---
+
+
+<p>🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️</p>
+<h2 id="86-分隔链表-下一道题变形题"><a href="#86-分隔链表-下一道题变形题" class="headerlink" title="86. 分隔链表(下一道题变形题)"></a>86. 分隔链表(下一道题变形题)</h2><p>给你一个链表和一个特定值 x ，请你对链表进行分隔，使得所有小于 x 的节点都出现在大于或等于 x 的节点之前。<br><strong>你应当保留两个分区中每个节点的初始相对位置。</strong><br>输入：head = 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2, x = 3<br>输出：1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5<br><code>遍历结束后，我们将large的next 指针置空，</code><br><code>这是因为当前节点复用的是原链表的节点，而其next 指针可能指向一个小于 x 的节点，我们需要切断这个引用</code><br><font color = 'MediumSlateBlue' size = 3><br>large最后是合并链表的最后一个元素，最后一个元素的next指向null<br>如果最后一个large刚好指向一个small的节点，就会有环了<br></font></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Solution &#123;
+    public ListNode partition(ListNode head, int x) &#123;
+        ListNode l1 &#x3D; new ListNode(-1);
+        ListNode l2 &#x3D; new ListNode(-1);
+        ListNode cur &#x3D; head;
+        ListNode small &#x3D; l1;
+        ListNode large &#x3D; l2;
+        while(cur!&#x3D;null)&#123;
+            if(cur.val&lt;x)&#123;
+                small.next &#x3D;cur;
+                small &#x3D; small.next;
+            &#125;else&#123;
+                large.next &#x3D; cur;
+                large &#x3D; large.next;
+            &#125;
+            cur &#x3D; cur.next;
+        &#125;
+        large.next &#x3D; null;
+        small.next &#x3D; l2.next;
+        return l1.next;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<p>🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️<br><strong>嘟嘟嘟嘟嘟嘟，还有和他相似的一道题</strong></p>
+<hr>
+<h2 id="面试题-02-04-分割链表（类似下一道）"><a href="#面试题-02-04-分割链表（类似下一道）" class="headerlink" title="面试题 02.04. 分割链表（类似下一道）"></a>面试题 02.04. 分割链表（类似下一道）</h2><p>编写程序以 x 为基准分割链表，使得所有小于 x 的节点排在大于或等于 x 的节点之前。如果链表中包含 x，x 只需出现在小于 x 的元素之后(如下所示)。分割元素 x 只需处于“右半部分”即可，其不需要被置于左右两部分之间。<br><code>题目要求是只要把小于x的数移动到所有x的左方就行,没有顺序要求，而且等于x,大于x这些元素没有要求！</code></p>
+<p><strong>所以运用双指针</strong>,<br>    <code>第一个指针落在不小于x的节点上,第二个向前移动。如果第二个指针遇到小于x的节点,交换二者的值,然后第一个指针指向next。第二个指针肯定走得更快,所以第一个指针一直处于不小于x的节点的位置，或者就是两个指针重叠,这时候还是礼貌性地交换一下罢了。</code></p>
+<p> // [1, 4, 3, 2, 5, 2]. prev = 1, cur = 1<br> // [1, 4, 3, 2, 5, 2]. prev = 1, cur = 1 小于,交换二者,没有变化<br> // [1, 4, 3, 2, 5, 2]. prev = 4, cur = 4 继续往后next<br> // [1, 4, 3, 2, 5, 2]. prev = 4, cur = 3 无序交换, 只修改cur指针<br> // [1, 4, 3, 2, 5, 2]. prev = 4, cur = 2 同上<br> // [1, 2, 3, 4, 5, 2]. prev = 2, cur = 4 2 &lt; 3,交换二者<br> // [1, 2, 3, 4, 5, 2]. prev = 3, cur = 5 二者同时往后next<br> // [1, 2, 3, 4, 5, 2]. prev = 3, cur = 2<br> // [1, 2, 2, 4, 5, 3] over</p>
+<p>`</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Solution &#123;
+    public ListNode partition(ListNode head, int x) &#123;
+        ListNode cur &#x3D; head, prev &#x3D; head;
+        while (cur !&#x3D; null) &#123;
+            if (cur.val &lt; x) &#123;
+                int tmp &#x3D; prev.val;
+                prev.val &#x3D; cur.val;
+                cur.val &#x3D; tmp;
+                prev &#x3D; prev.next;
+            &#125;
+            cur &#x3D; cur.next;
+        &#125;
+        return head;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<font color = 'MediumSlateBlue' size = 3> 
+其实有没有感觉这两道题思路挺相像的，都是双指针
+然后用一个指针表示小于的数或者奇数的位置，当满足条件是做处理然后移动该指针和遍历的指针，如果不满足条件仅仅只是移动遍历的指针；
+</font>
+
+
+<h2 id="剑指-Offer-21-调整数组顺序使奇数位于偶数前面"><a href="#剑指-Offer-21-调整数组顺序使奇数位于偶数前面" class="headerlink" title="剑指 Offer 21. 调整数组顺序使奇数位于偶数前面"></a>剑指 Offer 21. 调整数组顺序使奇数位于偶数前面</h2><pre class="line-numbers language-none"><code class="language-none">class Solution &#123;
+    public int[] exchange(int[] nums) &#123;
+        int i &#x3D; 0 ;
+         for(int j &#x3D; 0 ; j &lt; nums.length;j++)&#123;
+             if(nums[j]%2!&#x3D;0)&#123;
+                 int tmp &#x3D; nums[j];
+                 nums[j]&#x3D;nums[i];
+                 nums[i]&#x3D;tmp;
+                 i++;
+             &#125;
+         &#125;
+         return nums;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<p>🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️🏷️</p>
+<h2 id="234-回文链表（面试题-02-06-回文链表-）"><a href="#234-回文链表（面试题-02-06-回文链表-）" class="headerlink" title="234. 回文链表（面试题 02.06    回文链表  ）"></a>234. 回文链表（面试题 02.06    回文链表  ）</h2><p>请判断一个链表是否为回文链表。<br>输入: 1-&gt;2<br>输出: false<br>输入: 1-&gt;2-&gt;2-&gt;1<br>输出: true<br><code>整个流程可以分为以下五个步骤</code>：<br><code>找到前半部分链表的尾节点。</code><br><code>反转后半部分链表。</code><br><code>判断是否回文。</code><br><code>恢复链表</code>。<br><code>返回结果。</code></p>
+<p><code>我们也可以使用快慢指针在一次遍历中找到：慢指针一次走一步，快指针一次走两步，快慢指针同时出发。当快指针移动到链表的末尾时，慢指针恰好到链表的中间。通过慢指针将链表分为两部分。</code></p>
+<p><code>若链表有奇数个节点，则中间的节点应该看作是前半部分。</code></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Solution &#123;
+    public boolean isPalindrome(ListNode head) &#123;
+        if(head&#x3D;&#x3D;null||head.next&#x3D;&#x3D;null) return true;
+
+       &#x2F;&#x2F;找到第一个链表的末尾节点
+        ListNode last&#x3D;findMid(head);
+       &#x2F;&#x2F;反转第二个链表,start是第二个链表的首节点
+        ListNode start&#x3D;reverse(last.next);
+
+        ListNode l1 &#x3D; head;
+        ListNode l2 &#x3D; start;
+        boolean ans &#x3D; true;
+        while(ans&amp;&amp;l2!&#x3D;null)&#123;
+            if(l1.val!&#x3D;l2.val) ans &#x3D; false;
+
+            l1&#x3D;l1.next;
+            l2&#x3D;l2.next;
+        &#125;
+
+        &#x2F;&#x2F;回复链表
+        last.next &#x3D; reverse(start);
+
+        return ans;
+
+    &#125;
+
+    &#x2F;&#x2F;快慢指针
+    &#x2F;&#x2F;如果是奇数的话正好是中间的节点
+    &#x2F;&#x2F;如果是偶数的话-左中位数 比如1234 返回2
+    public ListNode findMid(ListNode head)&#123;
+        ListNode slow &#x3D; head;
+        ListNode fast &#x3D; head;
+        while(fast.next!&#x3D;null&amp;&amp;fast.next.next!&#x3D;null)&#123;
+            slow &#x3D; slow.next;
+            fast &#x3D; fast.next.next;
+        &#125;
+        return slow;
+    &#125;
+
+    &#x2F;&#x2F;反转链表 返回首节点
+    public ListNode reverse(ListNode head)&#123;
+        ListNode cur &#x3D; head,pre &#x3D; null;
+        while(cur!&#x3D;null)&#123;
+            ListNode next &#x3D; cur.next;
+            cur.next &#x3D; pre;
+            pre &#x3D; cur;
+            cur &#x3D; next;
+        &#125;
+        return pre;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
             </div>
             <hr/>
 
@@ -826,50 +1014,36 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/01/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E9%93%BE%E8%A1%A8/">
+                <a href="/2021/01/07/hi-md/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="与链表的再相识">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="hi.md">
                         
-                        <span class="card-title">与链表的再相识</span>
+                        <span class="card-title">hi.md</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            通过笔记加深对链表的认识
+                            
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-07
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E9%93%BE%E8%A1%A8/" class="post-category">
-                                    链表
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            小丸子
                             
                         </span>
                     </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E9%93%BE%E8%A1%A8/">
-                        <span class="chip bg-color">链表</span>
-                    </a>
-                    
                 </div>
                 
             </div>

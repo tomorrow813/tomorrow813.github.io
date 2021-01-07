@@ -541,14 +541,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-11
+                    2021-01-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    162
+                    349
                 </div>
                 
 
@@ -565,7 +565,30 @@
 </ol>
 <p>说明：你不能倾斜容器。<br><img src="2020-12-11-22-24-00.png"><br>示例 1：</p>
 <p>输入：[1,8,6,2,5,4,8,3,7]<br>输出：49<br>解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
-
+<hr>
+<h2 id="86-分隔链表"><a href="#86-分隔链表" class="headerlink" title="86. 分隔链表"></a>86. 分隔链表</h2><p>给你一个链表和一个特定值 x ，请你对链表进行分隔，使得所有小于 x 的节点都出现在大于或等于 x 的节点之前。<br><strong>你应当保留两个分区中每个节点的初始相对位置。</strong><br>输入：head = 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2, x = 3<br>输出：1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Solution &#123;
+    public ListNode partition(ListNode head, int x) &#123;
+        ListNode l1 &#x3D; new ListNode(-1);
+        ListNode l2 &#x3D; new ListNode(-1);
+        ListNode cur &#x3D; head;
+        ListNode small &#x3D; l1;
+        ListNode large &#x3D; l2;
+        while(cur!&#x3D;null)&#123;
+            if(cur.val&lt;x)&#123;
+                small.next &#x3D;cur;
+                small &#x3D; small.next;
+            &#125;else&#123;
+                large.next &#x3D; cur;
+                large &#x3D; large.next;
+            &#125;
+            cur &#x3D; cur.next;
+        &#125;
+        large.next &#x3D; null;
+        small.next &#x3D; l2.next;
+        return l1.next;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
             </div>
             <hr/>
 
