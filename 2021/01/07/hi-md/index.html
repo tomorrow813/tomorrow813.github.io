@@ -544,7 +544,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    85
                 </div>
                 
 
@@ -556,7 +556,29 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <pre class="line-numbers language-java" data-language="java"><code class="language-java">class Solution &#123;
+    public ListNode partition(ListNode head, int x) &#123;
+        ListNode l1 &#x3D; new ListNode(-1);
+        ListNode l2 &#x3D; new ListNode(-1);
+        ListNode cur &#x3D; head;
+        ListNode small &#x3D; l1;
+        ListNode large &#x3D; l2;
+        while(cur!&#x3D;null)&#123;
+            if(cur.val&lt;x)&#123;
+                small.next &#x3D;cur;
+                small &#x3D; small.next;
+            &#125;else&#123;
+                large.next &#x3D; cur;
+                large &#x3D; large.next;
+            &#125;
+            cur &#x3D; cur.next;
+        &#125;
+        large.next &#x3D; null;
+        small.next &#x3D; l2.next;
+        return l1.next;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
             </div>
             <hr/>
 
@@ -786,18 +808,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/01/07/hi-md/">
+                <a href="/2021/01/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="hi.md">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">hi.md</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -807,9 +828,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-07
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-11
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -818,7 +839,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -833,15 +853,15 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="与链表的再相识">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="与链表的初相识💗">
                         
-                        <span class="card-title">与链表的再相识</span>
+                        <span class="card-title">与链表的初相识💗</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            通过笔记加深对链表的认识，解题技巧：虚拟头节点，快慢指针
+                            通过笔记加深对链表的认识，解题技巧：虚拟头节点，快慢指针，双指针💗
                         
                     </div>
                     <div class="publish-info">
